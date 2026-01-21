@@ -1,4 +1,6 @@
-﻿namespace APIFinanceira.Models
+﻿using System.Security.Claims;
+
+namespace APIFinanceira.Models
 {
     public class Usuario
     {
