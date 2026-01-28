@@ -14,7 +14,7 @@ namespace APIFinanceira.Controllers
     public class AccountControllers : ControllerBase
     {
         [HttpPost("v1/account/register")]
-        public async Task<IActionResult> Register(
+        public async Task<IActionResult> RegisterAsync(
             [FromBody] RegisterViewModel model,
             [FromServices] ApiDataContext context)
         {
@@ -46,7 +46,7 @@ namespace APIFinanceira.Controllers
         }
 
         [HttpPost("v1/account/login")]
-        public async Task<IActionResult> Login(
+        public async Task<IActionResult> LoginAsync(
             [FromBody] LoginViewModel model,
             [FromServices] ApiDataContext context,
             [FromServices] TokenService tokenService)

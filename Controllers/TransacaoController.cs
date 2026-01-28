@@ -14,7 +14,7 @@ namespace APIFinanceira.Controllers
     {
         [HttpPost("v1/transacoes")]
         [Authorize]
-        public async Task<IActionResult> CriarTransacao(
+        public async Task<IActionResult> CriarTransacaoAsync(
             [FromBody] EditorTransacaoViewModel model,
             [FromServices] ApiDataContext context)
         {
@@ -48,7 +48,7 @@ namespace APIFinanceira.Controllers
 
         [HttpGet("v1/transacoes")]
         [Authorize]
-        public async Task<IActionResult> GetTrasancoes(
+        public async Task<IActionResult> GetTrasancoesAsync(
             [FromServices] ApiDataContext context)
         {
             var id = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
