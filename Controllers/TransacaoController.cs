@@ -49,7 +49,9 @@ namespace APIFinanceira.Controllers
         [HttpGet("v1/transacoes")]
         [Authorize]
         public async Task<IActionResult> GetTrasancoesAsync(
-            [FromServices] ApiDataContext context)
+            [FromServices] ApiDataContext context,
+            [FromQuery] int page = 0,
+            [FromQuery] int pageSize = 25)
         {
             var id = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
@@ -61,10 +63,17 @@ namespace APIFinanceira.Controllers
             var transacoes = await context.Transacoes
                 .AsNoTracking()
                 .Where(x => x.UsuarioId == usuarioId)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .OrderByDescending(x => x.Data)
                 .ToListAsync();
 
-            return Ok(new ResultViewModel<List<Transacao>>(transacoes));
+            return Ok(new ResultViewModel<dynamic>(new
+            {
+                page,
+                pageSize,
+                transacoes
+            }));
         }
     }
 }
